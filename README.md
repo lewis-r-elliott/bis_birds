@@ -4,18 +4,15 @@ author: "Lewis Elliott"
 date: "16/02/2022"
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-```{r load-packages, include=FALSE}
-pacman::p_load(rgdal, rgeos, raster, sp, tidyverse)
-```
+
+
 
 This readme explains the steps for appending globally-consistent birds species richness data to the BlueHealth International Survey data files using R. BlueHealth International Survey data files can be found [here](https://beta.ukdataservice.ac.uk/datacatalogue/studies/study?id=8874), but this tutorial uses the 18-country file internal to the University of Exeter users.
 
 Appending this data will require a number of geographical and data manipulation packages:
 
-```{r packages}
+
+```r
 if (!require("pacman")) install.packages("pacman") # easy package management
 pacman::p_load(rgdal, rgeos, raster, sp, tidyverse)
 ```
@@ -26,7 +23,8 @@ The birds species richness data used for this exercise was from Biopama and is r
 
 To load this TIF file into the global environment, we can use the `raster()` function and save it as an object (note, your file path will be wherever the TIF is saved):
 
-```{r load tif file}
+
+```r
 birds <- raster("C:/Users/lre203/OneDrive - University of Exeter/20160301_BH/20160301_Survey/20170713_Data/Exposure Assessment/Bird Richness/birds_richness_compressed.TIF")
 ```
 
