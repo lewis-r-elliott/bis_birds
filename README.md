@@ -2,6 +2,9 @@
 title: "Bird Species Richness Data for BIS"
 author: "Lewis Elliott"
 date: "16/02/2022"
+output:
+  md_document:
+    variant: markdown_github
 ---
 
 
@@ -14,13 +17,6 @@ Appending this data will require a number of geographical and data manipulation 
 
 ```r
 if (!require("pacman")) install.packages("pacman") # easy package management
-```
-
-```
-## Loading required package: pacman
-```
-
-```r
 pacman::p_load(rgdal, rgeos, raster, sp, tidyverse)
 ```
 
@@ -243,6 +239,6 @@ lm(lifesat ~ home_bird_richness_1000, data=bis) %>% sjPlot::plot_model(type="pre
 ## $home_bird_richness_1000
 ```
 
-![plot of chunk unnamed-chunk-2](figure/unnamed-chunk-2-1.png)
+![plot of chunk unnamed-chunk-1](figure/unnamed-chunk-1-1.png)
   
 ## END
