@@ -2,10 +2,6 @@
 title: "Bird Species Richness Data for BIS"
 author: "Lewis Elliott"
 date: "16/02/2022"
-output: 
-  prettydoc::html_pretty:
-    theme: hpstr
-    highlight: github
 ---
 
 
@@ -18,13 +14,6 @@ Appending this data will require a number of geographical and data manipulation 
 
 ```r
 if (!require("pacman")) install.packages("pacman") # easy package management
-```
-
-```
-## Loading required package: pacman
-```
-
-```r
 pacman::p_load(rgdal, rgeos, raster, sp, tidyverse)
 ```
 
