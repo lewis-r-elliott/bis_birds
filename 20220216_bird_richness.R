@@ -9,7 +9,6 @@ plot(birds)
 
 birds@crs # wgs84 (same as our BlueHealth data)
 
-
 # changing birds data to points data
 
 # birds_points <- rasterToPoints(birds) # would take fucking ages

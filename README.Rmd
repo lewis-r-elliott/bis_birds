@@ -2,10 +2,6 @@
 title: "Bird Species Richness Data for BIS"
 author: "Lewis Elliott"
 date: "16/02/2022"
-output: 
-  prettydoc::html_pretty:
-    theme: hpstr
-    highlight: github
 ---
 
 ```{r setup, include=FALSE}
