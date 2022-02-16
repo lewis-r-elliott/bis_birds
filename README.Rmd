@@ -2,6 +2,7 @@
 title: "Bird Species Richness Data for BIS"
 author: "Lewis Elliott"
 date: "16/02/2022"
+output: github_document
 ---
 
 ```{r setup, include=FALSE}
@@ -32,7 +33,7 @@ birds <- raster("C:/Users/lre203/OneDrive - University of Exeter/20160301_BH/201
 
 We can briefly view this data too with the `plot()` function:
 
-```{r map of birds}
+```{r}
 plot(birds)
 ```
 
@@ -48,14 +49,14 @@ The nice thing is the projection is in standard WGS84, the same as our coordinat
 
 I have the BIS data saved as an R workspace file which can be read in with the `load()` function:
 
-```{r load bis, eval=FALSE}
+```{r load bis}
 load("C:/Users/lre203/OneDrive - University of Exeter/20160301_BH/20160301_Survey/20170713_Data/Final Datasets/20200302_bis.RData")
 ```
 
 We can view, for example, the home locations overlaid on the bird richness map using the `points()` function:
 
-```{r overlay home locations}
-points(bis$home_longitude, bis$home_latitude)
+```{r}
+plot(birds) + points(bis$home_longitude, bis$home_latitude)
 ```
 
 You can see the anomalous home locations which can/could be screened out using the flag variables in the BIS dataset is using this bird richness dataset.
@@ -64,7 +65,7 @@ You can see the anomalous home locations which can/could be screened out using t
 
 In order to prepare the data for extraction of bird species richness information, we need to turn the home and visit coordinates in BIS into spatial points data frames. Firstly, we make data frames which are just the corresponding coordinates and IDs using some `dplyr` functions:
 
-```{r make concise data frames of bis coordinates, eval=F}
+```{r make concise data frames of bis coordinates}
 bis %>%
   select(id, home_longitude, home_latitude) %>%
   filter(across(everything(), ~!is.na(.))) -> bis_home_locations
@@ -126,7 +127,7 @@ raster::extract(birds,
 
 Now we have the data, these can be joined to the original bis dataset:
 
-```{r join back to bis, eval=FALSE}
+```{r join back to bis}
 bis %>%
   left_join(bis_home_locations_birds_300, by="id") %>%
   left_join(bis_home_locations_birds_1000, by="id") %>%
@@ -146,7 +147,7 @@ bis %>%
 
 And generate some histograms:
 
-```{r histograms of birds}
+```{r}
 bis %>%
   pivot_longer(cols = home_bird_richness_300:v_bird_richness_1000,
                names_to = "bird",
@@ -167,7 +168,7 @@ After that the world is your oyster (or bird):
 
   - Greener areas are more bird species rich:
   
-```{r linear model}
+```{r}
 pacman::p_load(sjPlot)
 lm(green_space_1000_pct ~ home_bird_richness_1000, data=bis) %>% sjPlot::plot_model(type="pred")
 ```
